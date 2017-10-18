@@ -13,9 +13,12 @@ var map = L.map('map').fitWorld();
 		var radius = e.accuracy / 2;
 
 		L.marker(e.latlng).addTo(map)
-			.bindPopup("tu estas aqui " + radius + " meters from this point").openPopup();
+			.bindPopup("tu estas a " + radius + " metros de este punto").openPopup();
+		
+		var lat = position.coords.latitude;
+		var lon = position.coords.longitude;
 
-		L.circle(e.latlng, radius).addTo(map);
+	    L.heatLayer([lat,lon,1],{radius: 25,maxZoom: 8,blur: 30}).addTo(map);
 	}
 
 	function onLocationError(e) {
